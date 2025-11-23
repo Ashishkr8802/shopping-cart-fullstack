@@ -1,6 +1,6 @@
 module shopping-backend
 
-go 1.25.4
+go 1.25
 
 require (
 	github.com/bytedance/sonic v1.14.0 // indirect
