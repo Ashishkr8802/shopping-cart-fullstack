@@ -2,19 +2,25 @@
 package main
 
 import (
-	"log"
+    "log"
+    "os"
 
-	"shopping-backend/internal/database"
-	"shopping-backend/internal/http/router"
+    "shopping-backend/internal/database"
+    "shopping-backend/internal/http/router"
 )
 
 func main() {
-	database.Connect()
+    database.Connect()
 
-	r := router.SetupRouter()
+    r := router.SetupRouter()
 
-	log.Println("Server running on :8080")
-	if err := r.Run(":8080"); err != nil {
-		log.Fatal(err)
-	}
+    port := os.Getenv("PORT")
+    if port == "" {
+        port = "8080"
+    }
+
+    log.Println("Server running on port", port)
+    if err := r.Run(":" + port); err != nil {
+        log.Fatal(err)
+    }
 }
